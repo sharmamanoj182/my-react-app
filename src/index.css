@@ -7,6 +7,10 @@ code {
   font-family: 'arial';
 }
 
+*, :after, :before {
+  box-sizing: border-box;
+}
+
 .mainpage{
   padding: 50px;
   text-align: center;

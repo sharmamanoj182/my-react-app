@@ -1,3 +1,5 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
 import logonew from '../images/modified-id-logo.svg';
 
 function Hello() {
@@ -9,8 +11,9 @@ function Hello() {
 
 <div className='linkbox'>
     <div>
-    <a>popup modal</a>
-    <a>Loaders ui</a>
+    <Link onClick={() => window.location.href='/popupmodal'}>popup modal</Link>
+
+    <a onClick={() => window.location.href='/loderui'}>Loaders ui</a>
     <a>Loader with animation - 1</a>
     <a>Loader with animation - 2</a>
     <a>Loader with animation - 3</a>
