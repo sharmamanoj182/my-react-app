@@ -5,9 +5,9 @@
     right: 0;
     bottom: 0;
     position: fixed;
-    z-index: 9999999;
+    z-index: 9;
 
-    .popbackground{
+   .popbackground{
     touch-action: none;
     background-color: rgba(51, 56, 70, .7);
     top: 0;

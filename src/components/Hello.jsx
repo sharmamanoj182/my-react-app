@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logonew from '../images/modified-id-logo.svg';
+import MobileNavbar from './MobileNavbar';
 
 function Hello() {
     return <div className="mainpage">
+        <MobileNavbar />
+    
         <div className="idlogo">
             <img src={logonew} />  
             <span>ID UI System</span>        

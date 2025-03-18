@@ -2,10 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import "../css/popupmodal.css";
 import closeicon from '../images/v2_close_24.svg';
-
+import MobileNavbar from './MobileNavbar';
 function Popupmodal() {
     return(
     <div>
+         <MobileNavbar />
+      
         <Link to="/">Back</Link>
         <div className='popupstart'>
             <div className='popbackground'></div>
