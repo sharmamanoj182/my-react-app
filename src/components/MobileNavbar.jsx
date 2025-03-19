@@ -1,9 +1,8 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function VoiceNavigation() {
-  const [isListening, setIsListening] = useState(false);
-  const [message, setMessage] = useState("Click 'Start Listening' to begin.");
+  const [message, setMessage] = useState("🎤 Listening... Say 'health insurance', 'car insurance', or 'bike insurance'.");
   const recognitionRef = useRef(null);
   const navigate = useNavigate();
 
@@ -19,7 +18,7 @@ export default function VoiceNavigation() {
     recognition.continuous = true;
     recognition.lang = "en-US";
 
-    recognition.onstart = () => setMessage("🎤 Listening... Say 'homepage', 'home page', 'loder', or 'pop up'.");
+    recognition.onstart = () => setMessage("🎤 Listening... Say 'health insurance', 'car insurance', or 'bike insurance'.");
     recognition.onerror = () => setMessage("❌ Error occurred. Try again.");
     
     recognition.onresult = (event) => {
@@ -28,40 +27,32 @@ export default function VoiceNavigation() {
       setMessage(`✅ Heard: "${command}"`);
 
       const routes = {
-        "homepage": "/",
-        "home page": "/",
-        "loader": "/loderui",
-        "pop up": "/popupmodal",
+        "health insurance": "/",
+        "car insurance": "/loderui",
+        "bike insurance": "/popupmodal",
       };
 
       const matchedRoute = Object.keys(routes).find((key) => command.includes(key));
 
       if (matchedRoute) {
         setMessage(`🔄 Navigating to ${matchedRoute}...`);
-        setTimeout(() => navigate(routes[matchedRoute]), 500);
+        setTimeout(() => navigate(routes[matchedRoute]), 100);
       } else {
-        setMessage("❌ Command not recognized. Try again.");
+        setMessage("❌ Please speak again.");
       }
     };
 
-    if (isListening) {
-      recognition.start();
-    } else {
-      recognition.stop();
-    }
+    // Start listening automatically
+    recognition.start();
 
-    return () => recognition.stop();
-  }, [isListening, navigate]);
+    return () => {
+      recognition.stop();
+    };
+  }, [navigate]);
 
   return (
     <div className="p-4 text-center listenbox">
       <p>{message}</p>
-      <button 
-        className={`px-4 py-2 rounded ${isListening ? "bg-red-500" : "bg-green-500"} text-white`} 
-        onClick={() => setIsListening(!isListening)}
-      >
-        {isListening ? "Stop Listening" : "Start Listening"}
-      </button>
     </div>
   );
 }
